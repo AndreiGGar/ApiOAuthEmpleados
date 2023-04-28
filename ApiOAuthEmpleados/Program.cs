@@ -16,7 +16,7 @@ namespace ApiOAuthEmpleados
             builder.Services.AddSingleton<HelperOAuthToken>();
             HelperOAuthToken helper = new HelperOAuthToken(builder.Configuration);
             builder.Services.AddAuthentication(helper.GetAuthenticationOptions()).AddJwtBearer(helper.GetJwtOptions());
-            string connectionString = builder.Configuration.GetConnectionString("SqlServer");
+            string connectionString = builder.Configuration.GetConnectionString("SqlAzure");
             builder.Services.AddTransient<RepositoryEmpleados>();
             builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddControllers();
@@ -54,7 +54,6 @@ namespace ApiOAuthEmpleados
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
